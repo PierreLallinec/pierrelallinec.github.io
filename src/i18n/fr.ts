@@ -7,9 +7,9 @@ export const fr = {
   switchTo: 'EN',
   switchLabel: 'Read this page in English',
   home: {
-    title: 'Pierre Lallinec · Data, produit et triathlon',
+    title: 'Pierre Lallinec · Data Analyst',
     description:
-      'Site personnel de Pierre Lallinec : data analyst, parcours professionnel et résultats sportifs en triathlon, course à pied et vélo.',
+      "Pierre Lallinec, data analyst au tempérament de builder, formé à la finance : parcours, réalisations et outils.",
     intro:
       "Data analyst avec un tempérament de builder et une formation en finance. Depuis bientôt dix ans, je transforme des problèmes métier en modèles de données, en analyses et en outils utilisés au quotidien. En dehors du travail : ma famille, et un peu (trop ?) de sport.",
     careerLink: 'Mon parcours professionnel',

@@ -9,9 +9,9 @@ export const en: Dict = {
   switchTo: 'FR',
   switchLabel: 'Lire cette page en français',
   home: {
-    title: 'Pierre Lallinec · Data, product and triathlon',
+    title: 'Pierre Lallinec · Data Analyst',
     description:
-      'Personal site of Pierre Lallinec: data analyst, career history and race results in triathlon, running and cycling.',
+      "Pierre Lallinec, data analyst with a builder's mindset and a background in finance: career, projects and tools.",
     intro:
       "Data analyst with a builder's mindset and a background in finance. For almost ten years I've been turning business problems into data models, analyses and tools that teams use every day. Outside work: my family, and a little (too much?) sport.",
     careerLink: 'My career',

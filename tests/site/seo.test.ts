@@ -87,3 +87,14 @@ it.each(PAGES)('le nom accessible du choix de langue de $path contient son texte
   if (label) expect(label).toContain(link.text.trim());
   expect(link.getAttribute('title')).toBeTruthy();
 });
+
+it.each([['/'], ['/fr/']])('l’accueil %s se présente par le métier, sans mention du sport', (path) => {
+  const doc = loadPage(path);
+  expect(doc.querySelector('title')?.text).toBe('Pierre Lallinec · Data Analyst');
+  expect(doc.querySelector('meta[name=description]')?.getAttribute('content')).not.toMatch(/triathlon|sport|race|course/i);
+});
+
+it.each(PAGES)('$path déclare une icône pour l’écran d’accueil des téléphones', ({ path }) => {
+  expect(loadPage(path).querySelector('link[rel=apple-touch-icon]')?.getAttribute('href')).toBe('/apple-touch-icon.png');
+  expect(readDist('/apple-touch-icon.png').length).toBeGreaterThan(500);
+});
