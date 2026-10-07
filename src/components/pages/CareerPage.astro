@@ -1,0 +1,64 @@
+---
+import { site } from '../../config';
+import { dict, type Lang } from '../../i18n';
+import Base from '../../layouts/Base.astro';
+import { loadParcours } from '../../lib/parcours';
+import Tags from '../Tags.astro';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = dict[lang];
+const parcours = loadParcours();
+---
+
+<Base lang={lang} page="career" title={t.career.title} description={t.career.description}>
+  <h1>{t.career.h1}</h1>
+
+  <div class="career-intro">
+    <div class="story" data-story>
+      {parcours.recit.map((paragraph) => <p>{paragraph[lang]}</p>)}
+    </div>
+    <aside>
+      <section data-education>
+        <h2>{t.career.education}</h2>
+        <ul class="plain-list">
+          {parcours.formation.ecoles.map((school) => <li>{school}</li>)}
+        </ul>
+      </section>
+      <section data-languages>
+        <h2>{t.career.languages}</h2>
+        <ul class="plain-list">
+          {parcours.langues.map((language) => <li>{language[lang]}</li>)}
+        </ul>
+      </section>
+      <a class="button" href={site.linkedin} rel="me noopener">{t.linkedin}</a>
+    </aside>
+  </div>
+
+  {
+    parcours.realisations.map((block) => (
+      <section data-block>
+        <h2>
+          {block.titre[lang]}
+          {block.periode && <span class="block-period">{block.periode}</span>}
+        </h2>
+        <div class="featured-grid">
+          {block.elements.map((item) => (
+            <article class="featured" data-realisation>
+              <h3>{item.titre[lang]}</h3>
+              <p>{item.texte[lang]}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+    ))
+  }
+
+  <section aria-labelledby="tools">
+    <h2 id="tools">{t.career.tools}</h2>
+    <Tags items={parcours.outils} lang={lang} />
+  </section>
+</Base>

@@ -1,0 +1,34 @@
+---
+import { dict, formatLabel, type Lang } from '../i18n';
+import type { Course } from '../lib/courses';
+import { formatDate, formatRank, toSeconds } from '../lib/format';
+import SplitBar from './SplitBar.astro';
+import Splits from './Splits.astro';
+
+interface Props {
+  course: Course;
+  lang: Lang;
+}
+
+const { course, lang } = Astro.props;
+const t = dict[lang].sport;
+const rank = formatRank(course.classement, course.participants, lang);
+const drawable =
+  course.partiels !== undefined &&
+  [course.partiels.natation, course.partiels.velo, course.partiels.course].every((x) => toSeconds(x) !== undefined);
+---
+
+<article class="featured" data-featured>
+  <p class="featured-meta">
+    <time datetime={course.date}>{formatDate(course.date, lang)}</time>
+    <span>{t.disciplines[course.discipline]} {formatLabel(course.format, lang)}</span>
+  </p>
+  <h4>{course.nom}</h4>
+  <p class="featured-time">{course.temps}</p>
+  <p class="featured-facts">
+    {rank && <span>{rank}</span>}
+    {course.mention?.[lang] && <span>{course.mention[lang]}</span>}
+  </p>
+  {course.partiels && drawable && <SplitBar course={course} lang={lang} compact />}
+  {course.partiels && !drawable && <Splits partiels={course.partiels} lang={lang} />}
+</article>

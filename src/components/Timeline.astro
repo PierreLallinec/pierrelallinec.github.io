@@ -1,0 +1,47 @@
+---
+import { dict, type Lang } from '../i18n';
+import { timeline, type Experience } from '../lib/parcours';
+
+interface Props {
+  experiences: Experience[];
+  lang: Lang;
+}
+
+const { experiences, lang } = Astro.props;
+const t = dict[lang].career;
+const steps = timeline(experiences);
+// Une colonne par étape, séparées par une colonne étroite pour le point et son année.
+const columns = steps.map(() => 'minmax(0, 1fr)').join(' auto ');
+---
+
+<ol class="timeline" data-timeline style={`--tl-columns: ${columns}`}>
+  {
+    steps.map((step, index) => (
+      <>
+        {index > 0 && (
+          <li class="tl-dot" style={`--i: ${index}`}>
+            <span class="tl-top" />
+            <span class="tl-mark" />
+            <span class="tl-year">{step.debut}</span>
+          </li>
+        )}
+        {step.kind === 'role' ? (
+          <li class="tl-step" data-step style={`--i: ${index}`}>
+            <span class="tl-role">{step.experience.poste[lang]}</span>
+            <span class="tl-line" />
+            <span class="tl-org">{step.experience.repere?.[lang] ?? step.experience.structure}</span>
+            <span class="sr-only">
+              {step.debut} – {step.fin ?? t.present}
+            </span>
+          </li>
+        ) : (
+          <li class="tl-step tl-gap" aria-hidden="true" style={`--i: ${index}`}>
+            <span class="tl-role" />
+            <span class="tl-line" />
+            <span class="tl-org" />
+          </li>
+        )}
+      </>
+    ))
+  }
+</ol>

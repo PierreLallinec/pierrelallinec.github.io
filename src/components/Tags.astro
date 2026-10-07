@@ -1,0 +1,33 @@
+---
+import { dict, type Lang } from '../i18n';
+import type { Parcours } from '../lib/parcours';
+
+interface Props {
+  items: Parcours['outils'];
+  lang: Lang;
+}
+
+const { items, lang } = Astro.props;
+const t = dict[lang].career;
+const label = (experience: string) => (experience === 'perso' ? t.sideProjects : experience);
+---
+
+<ul class="tags">
+  {
+    items.map((item) =>
+      item.experiences.length > 0 ? (
+        // Focalisable : l'infobulle s'ouvre au survol, au clavier et au toucher.
+        <li class="tag has-tip" tabindex="0">
+          <span class="tag-name">{item.nom}</span>
+          <span class="tag-tip" role="tooltip">
+            {item.experiences.map(label).join(', ')}
+          </span>
+        </li>
+      ) : (
+        <li class="tag">
+          <span class="tag-name">{item.nom}</span>
+        </li>
+      ),
+    )
+  }
+</ul>

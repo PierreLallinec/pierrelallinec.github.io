@@ -1,0 +1,64 @@
+---
+import { site } from '../../config';
+import { defaultLang, dict, routes, type Lang } from '../../i18n';
+import Base from '../../layouts/Base.astro';
+import { loadParcours } from '../../lib/parcours';
+import Timeline from '../Timeline.astro';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = dict[lang];
+const parcours = loadParcours();
+const abs = (path: string) => new URL(path, site.url).href;
+// Ce que Google lit pour associer la page à une personne. Aucun champ sensible : ni date de naissance, ni adresse, ni contact.
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfilePage',
+  url: abs(routes.home[lang]),
+  inLanguage: lang,
+  mainEntity: {
+    '@type': 'Person',
+    name: site.name,
+    url: abs(routes.home[defaultLang]),
+    image: abs('/photo.webp'),
+    jobTitle: 'Data Analyst',
+    worksFor: { '@type': 'Organization', name: site.employer },
+    alumniOf: parcours.formation.ecoles.map((name) => ({ '@type': 'CollegeOrUniversity', name })),
+    knowsLanguage: ['fr', 'en'],
+    sameAs: [site.linkedin],
+  },
+};
+---
+
+<Base lang={lang} page="home" title={t.home.title} description={t.home.description} footer={false}>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  <section class="hero">
+    <div class="hero-text">
+      <h1>
+        <span class="name-first">{site.name.split(' ')[0]}</span>{' '}
+        <span class="name-last">{site.name.split(' ').slice(1).join(' ')}</span>
+      </h1>
+      <p class="intro">{t.home.intro}</p>
+    </div>
+    <!-- Le portrait se retourne comme une pièce : au survol, au clavier ou au toucher. -->
+    <button class="coin portrait-frame" type="button" aria-pressed="false" aria-label={t.home.flip}>
+      <span class="coin-inner">
+        <img class="portrait coin-face" src="/photo.webp" alt={t.home.photoAlt} width="640" height="640" />
+        <img class="coin-face coin-back" src="/photo-sport.webp" alt={t.home.photoBackAlt} width="640" height="640" loading="lazy" />
+      </span>
+    </button>
+  </section>
+  <Timeline experiences={parcours.experiences} lang={lang} />
+</Base>
+
+<script>
+  // Le survol suffit à la souris ; au doigt ou au clavier, un appui retourne la photo et un second la remet.
+  for (const coin of document.querySelectorAll<HTMLButtonElement>('button.coin')) {
+    coin.addEventListener('click', () => {
+      coin.setAttribute('aria-pressed', coin.getAttribute('aria-pressed') === 'true' ? 'false' : 'true');
+    });
+  }
+</script>

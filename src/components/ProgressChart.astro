@@ -1,0 +1,75 @@
+---
+import { dict, type Lang } from '../i18n';
+import { decimalYear, plot, type Box } from '../lib/chart';
+import { progression, type Course } from '../lib/courses';
+import { formatDate, yearOf } from '../lib/format';
+
+interface Props {
+  courses: Course[];
+  format: string;
+  lang: Lang;
+}
+
+const { courses, format, lang } = Astro.props;
+const t = dict[lang].sport;
+const series = progression(courses, format);
+const box: Box = { width: 480, height: 262, left: 34, right: 34, top: 34, bottom: 66 };
+const pts = plot(
+  series.map((p) => ({ x: decimalYear(p.course.date), y: p.seconds })),
+  box,
+);
+const line = pts.map((p, i) => `${i === 0 ? 'M' : 'L'}${p.px} ${p.py}`).join(' ');
+const bestIndex = series.reduce((best, p, i) => (p.seconds < series[best].seconds ? i : best), 0);
+const first = series[0];
+const best = series[bestIndex];
+const summary = t.progressSummary
+  .replace('{first}', first?.course.temps ?? '')
+  .replace('{firstYear}', String(first ? yearOf(first.course.date) : ''))
+  .replace('{best}', best?.course.temps ?? '')
+  .replace('{bestYear}', String(best ? yearOf(best.course.date) : ''));
+// L'axe passe sous l'étiquette du premier point, qui est aussi le plus bas.
+const axisY = box.height - box.bottom + 36;
+// L'étiquette d'un point proche du bord droit s'aligne à droite pour rester dans le cadre.
+const anchor = (px: number) => (px > box.width - 90 ? 'end' : px < 90 ? 'start' : 'middle');
+---
+
+{
+  series.length > 1 && (
+    <figure class="progress" data-progress={format}>
+      <figcaption>
+        <h3>{t.progressTitles[format] ?? format}</h3>
+        <p>{summary}</p>
+      </figcaption>
+      <svg viewBox={`0 0 ${box.width} ${box.height}`} role="img" aria-label={`${t.progressTitles[format] ?? format}. ${summary}.`}>
+        <line class="axis" x1={box.left} x2={box.width - box.right} y1={axisY} y2={axisY} />
+        <text class="tick" x={box.left} y={axisY + 18} text-anchor="start">{yearOf(first.course.date)}</text>
+        <text class="tick" x={box.width - box.right} y={axisY + 18} text-anchor="end">
+          {yearOf(series.at(-1)!.course.date)}
+        </text>
+        <path class="line" data-line d={line} pathLength="1" />
+        {
+          pts.map((p, i) => (
+            <circle
+              class:list={['point', { best: i === bestIndex }]}
+              data-point
+              cx={p.px}
+              cy={p.py}
+              r={i === bestIndex ? 6 : 4.5}
+              style={`--i: ${i}`}
+            >
+              <title>{`${series[i].course.nom}, ${formatDate(series[i].course.date, lang)} : ${series[i].course.temps}`}</title>
+            </circle>
+          ))
+        }
+        <text class="value" x={pts[0].px} y={pts[0].py + 22} text-anchor={anchor(pts[0].px)}>{first.course.temps}</text>
+        {
+          bestIndex !== 0 && (
+            <text class="value best" x={pts[bestIndex].px} y={pts[bestIndex].py - 14} text-anchor={anchor(pts[bestIndex].px)}>
+              {best.course.temps}
+            </text>
+          )
+        }
+      </svg>
+    </figure>
+  )
+}

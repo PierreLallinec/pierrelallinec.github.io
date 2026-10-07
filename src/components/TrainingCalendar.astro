@@ -1,0 +1,120 @@
+---
+import { dict, type Lang } from '../i18n';
+import { bucket, DISCIPLINES, monthCells, ringSlices, yearTotals, type Training } from '../lib/entrainement';
+import { formatDate, formatDuration } from '../lib/format';
+
+interface Props {
+  training: Training;
+  lang: Lang;
+}
+
+const { training, lang } = Astro.props;
+const t = dict[lang].sport;
+const lastYear = Number(training.maj.slice(0, 4));
+const totals = new Map(yearTotals(training).map((y) => [y.annee, y]));
+const firstYear = Number(training.debut.slice(0, 4));
+const years = Array.from({ length: lastYear - firstYear + 1 }, (_, i) => firstYear + i);
+const radius = 42;
+const circumference = 2 * Math.PI * radius;
+const labels = { natation: t.splitLabels.natation, velo: t.splitLabels.velo, course: t.splitLabels.course, muscu: t.strength, autre: t.other };
+const round = (n: number) => Math.round(n * 100) / 100;
+// Le français met une espace avant les deux-points, l'anglais non.
+const colon = lang === 'fr' ? ' : ' : ': ';
+const cell = 13;
+const months = Array.from({ length: 12 }, (_, i) => i + 1);
+---
+
+<div class="calendar" data-calendar>
+  <div class="calendar-nav">
+    <button type="button" data-scroll="-1" aria-label={t.previous}>‹</button>
+    <button type="button" data-scroll="1" aria-label={t.next}>›</button>
+  </div>
+  <div class="calendar-years" role="region" aria-label={t.calendarLabel} tabindex="0">
+    {
+      years.map((year) => {
+        const total = totals.get(year);
+        return (
+          <section class="calendar-year" data-calendar-year={year}>
+            <h3>{year}</h3>
+            <p class="calendar-summary">{t.calendarSummary.replace('{days}', String(total?.jours ?? 0))}</p>
+            {total && (
+              <div class="ring" data-ring>
+                <svg viewBox="0 0 100 100" aria-hidden="true">
+                  {ringSlices(total, circumference).map((slice) => (
+                    <circle
+                      class={`slice seg-${slice.key}`}
+                      data-slice={slice.key}
+                      cx="50"
+                      cy="50"
+                      r={radius}
+                      stroke-dasharray={`${round(Math.max(0, slice.length - 1.5))} ${round(circumference)}`}
+                      stroke-dashoffset={round(-slice.start)}
+                    >
+                      <title>{`${labels[slice.key]}${colon}${Math.round(total[slice.key] / 60)} ${t.hours}`}</title>
+                    </circle>
+                  ))}
+                </svg>
+                <p class="ring-center">
+                  <span class="ring-hours">{Math.round(total.total / 60)}</span>
+                  <span class="ring-unit">{t.ringUnit}</span>
+                </p>
+              </div>
+            )}
+            <div class="calendar-months">
+              {months.map((month) => (
+                <div class="calendar-month">
+                  <span class="calendar-label">{t.months[month - 1]}</span>
+                  <svg data-month={month} viewBox={`0 0 ${cell * 7} ${cell * 6}`} aria-hidden="true" style={`--m: ${month}`}>
+                    {monthCells(year, month, training.maj, training.debut).map(({ date, col, row }) => {
+                      const minutes = training.days.get(date)?.total ?? 0;
+                      const level = bucket(minutes);
+                      return (
+                        <circle data-day data-level={level} class={`heat-${level}`} cx={col * cell + cell / 2} cy={row * cell + cell / 2} r="5">
+                          <title>{`${formatDate(date, lang)}${colon}${formatDuration(minutes, lang)}`}</title>
+                        </circle>
+                      );
+                    })}
+                  </svg>
+                </div>
+              ))}
+            </div>
+          </section>
+        );
+      })
+    }
+  </div>
+  <ul class="legend ring-legend">
+    {
+      DISCIPLINES.map((key) => (
+        <li>
+          <span class={`dot seg-${key}`} />
+          {labels[key]}
+        </li>
+      ))
+    }
+  </ul>
+  <ul class="legend heat-legend">
+    {
+      t.calendarLegend.map((label, level) => (
+        <li>
+          <span class={`dot heat-${level}`} />
+          {label}
+        </li>
+      ))
+    }
+  </ul>
+</div>
+
+<script>
+  // La bande s'ouvre sur les années les plus récentes ; les flèches la font glisser d'une année.
+  for (const calendar of document.querySelectorAll<HTMLElement>('[data-calendar]')) {
+    const strip = calendar.querySelector<HTMLElement>('.calendar-years')!;
+    strip.scrollLeft = strip.scrollWidth;
+    for (const button of calendar.querySelectorAll<HTMLButtonElement>('button[data-scroll]')) {
+      button.addEventListener('click', () => {
+        const step = strip.querySelector<HTMLElement>('.calendar-year')!.getBoundingClientRect().width;
+        strip.scrollBy({ left: Number(button.dataset.scroll) * step, behavior: 'smooth' });
+      });
+    }
+  }
+</script>

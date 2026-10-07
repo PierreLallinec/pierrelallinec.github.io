@@ -1,0 +1,11 @@
+---
+import { dict, routes } from '../i18n';
+import Base from '../layouts/Base.astro';
+---
+
+<Base lang="en" page={null} title={dict.en.notFound.title} description={dict.en.notFound.h1}>
+  <meta slot="head" name="robots" content="noindex" />
+  <h1>{dict.en.notFound.h1}</h1>
+  <p class="page-links"><a href={routes.home.en}>{dict.en.notFound.back}</a></p>
+  <p class="page-links" lang="fr"><a href={routes.home.fr}>{dict.fr.notFound.back}</a></p>
+</Base>

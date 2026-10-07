@@ -1,0 +1,25 @@
+---
+import { dict, type Lang } from '../i18n';
+import type { Course } from '../lib/courses';
+
+interface Props {
+  partiels: NonNullable<Course['partiels']>;
+  lang: Lang;
+}
+
+const { partiels, lang } = Astro.props;
+const labels = dict[lang].sport.splitLabels;
+const order = ['natation', 't1', 'velo', 't2', 'course'] as const;
+const rows = order.filter((key) => partiels[key]);
+---
+
+<dl class="splits">
+  {
+    rows.map((key) => (
+      <div>
+        <dt>{labels[key]}</dt>
+        <dd>{partiels[key]}</dd>
+      </div>
+    ))
+  }
+</dl>

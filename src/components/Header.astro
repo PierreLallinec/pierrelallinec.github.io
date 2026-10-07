@@ -1,0 +1,46 @@
+---
+import { site } from '../config';
+import { dict, otherLang, routes, type Lang, type PageKey } from '../i18n';
+
+interface Props {
+  lang: Lang;
+  page: PageKey | null;
+}
+
+const { lang, page } = Astro.props;
+const t = dict[lang];
+const other = otherLang(lang);
+const keys: PageKey[] = ['home', 'career', 'sport'];
+---
+
+<header class="site-header">
+  <a class="site-name" href={routes.home[lang]}>{site.name}</a>
+  <nav aria-label={t.navLabel}>
+    <ul>
+      {
+        keys.map((key) => (
+          <li>
+            <a href={routes[key][lang]} aria-current={key === page ? 'page' : undefined}>
+              {t.nav[key]}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+  {
+    site.agenda && (
+      <a class="button" data-agenda href={site.agenda} target="_blank" rel="noopener" title={t.talk}>
+        {t.talkShort}
+      </a>
+    )
+  }
+  <a
+    class="lang-switch"
+    data-lang-switch
+    href={routes[page ?? 'home'][other]}
+    hreflang={other}
+    lang={other}
+    title={t.switchLabel}>{t.switchTo}</a
+  >
+</header>

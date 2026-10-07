@@ -1,0 +1,57 @@
+---
+import '@fontsource-variable/raleway/wght.css';
+import '../styles/global.css';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { site } from '../config';
+import { defaultLang, routes, type Lang, type PageKey } from '../i18n';
+
+interface Props {
+  lang: Lang;
+  page: PageKey | null;
+  title: string;
+  description: string;
+  /** Faux sur l'accueil, où le pied de page répéterait le menu. */
+  footer?: boolean;
+}
+
+const { lang, page, title, description, footer = true } = Astro.props;
+const abs = (path: string) => new URL(path, site.url).href;
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    {
+      page && (
+        <>
+          <link rel="canonical" href={abs(routes[page][lang])} />
+          <link rel="alternate" hreflang="fr" href={abs(routes[page].fr)} />
+          <link rel="alternate" hreflang="en" href={abs(routes[page].en)} />
+          <link rel="alternate" hreflang="x-default" href={abs(routes[page][defaultLang])} />
+          <meta property="og:type" content="website" />
+          <meta property="og:site_name" content={site.name} />
+          <meta property="og:title" content={title} />
+          <meta property="og:description" content={description} />
+          <meta property="og:url" content={abs(routes[page][lang])} />
+          <meta property="og:image" content={abs('/og.png')} />
+          <meta property="og:image:width" content="1200" />
+          <meta property="og:image:height" content="630" />
+          <meta property="og:locale" content={lang === 'fr' ? 'fr_FR' : 'en_GB'} />
+          <meta name="twitter:card" content="summary_large_image" />
+        </>
+      )
+    }
+    <slot name="head" />
+  </head>
+  <body>
+    <Header lang={lang} page={page} />
+    <main><slot /></main>
+    {footer && <Footer />}
+  </body>
+</html>

@@ -1,0 +1,351 @@
+# Une entrée par course. Champs obligatoires : date, nom, discipline, format, temps.
+# date : AAAA-MM-JJ, AAAA-MM ou AAAA. discipline : triathlon, course, velo ou trail.
+# Mettre les temps entre guillemets. Voir README.md.
+
+- date: 2025-08-23
+  nom: 24 Heures Vélo du Mans
+  lieu: Le Mans
+  discipline: velo
+  format: 24 h
+  temps: "24 h"
+  classement: 255
+  participants: 652
+  mention:
+    fr: 853 km en équipe de quatre
+    en: 853 km as a team of four
+
+- date: 2025-05-18
+  nom: Triathlon de l'île Charlemagne
+  lieu: Orléans
+  discipline: triathlon
+  format: M
+  temps: "2:03:01"
+  classement: 2
+  participants: 444
+  marquante: true
+  mention:
+    fr: 2e au scratch
+    en: 2nd overall
+  partiels:
+    natation: "21:43"
+    velo: "1:00:28"
+    course: "38:58"
+
+- date: 2025-04-27
+  nom: Foulées d'Orléans
+  lieu: Orléans
+  discipline: course
+  format: semi-marathon
+  temps: "1:19:22"
+  classement: 11
+  participants: 1430
+  marquante: true
+  mention:
+    fr: Record personnel sur semi-marathon
+    en: Half marathon personal best
+
+- date: 2025-03-16
+  nom: Semi-marathon de Lille
+  lieu: Lille
+  discipline: course
+  format: semi-marathon
+  temps: "1:21:17"
+  classement: 531
+  participants: 10000
+
+- date: 2025-03-02
+  nom: Brevet de randonneur « Raboliot »
+  lieu: Fleury-les-Aubrais
+  discipline: velo
+  format: 200 km
+  temps: "6 h 51"
+
+- date: 2024-08-10
+  nom: Marathon pour tous
+  lieu: Paris
+  discipline: course
+  format: marathon
+  temps: "3:26:34"
+  marquante: true
+  mention:
+    fr: Sur le parcours du marathon olympique de Paris 2024
+    en: On the Paris 2024 Olympic marathon course
+
+- date: 2024-06-22
+  nom: La Tricolore
+  lieu: Saint-Hilaire-du-Harcouët
+  discipline: velo
+  format: 107 km
+  temps: "2:57:58"
+  classement: 106
+  participants: 600
+
+- date: 2024-06-09
+  nom: Tours'N Man
+  lieu: Tours
+  discipline: triathlon
+  format: L
+  temps: "4:26:48"
+  classement: 19
+  participants: 537
+  marquante: true
+  mention:
+    fr: Record personnel sur format L
+    en: Half-distance personal best
+  partiels:
+    natation: "30:48"
+    t1: "2:11"
+    velo: "2:19:28"
+    t2: "1:47"
+    course: "1:29:02"
+
+- date: 2024-04-28
+  nom: Triathlon de Cannes
+  lieu: Cannes
+  discipline: triathlon
+  format: L
+  temps: "4:46:27"
+  classement: 41
+  partiels:
+    natation: "31:23"
+    t1: "3:33"
+    velo: "2:44:21"
+    t2: "2:27"
+    course: "1:24:43"
+
+- date: 2024-04-14
+  nom: Semi-marathon d'Orléans
+  lieu: Orléans
+  discipline: course
+  format: semi-marathon
+  temps: "1:25:33"
+  classement: 33
+  participants: 800
+
+- date: 2023-11-25
+  nom: Course des 3 Ponts
+  lieu: Orléans
+  discipline: course
+  format: 10 km
+  temps: "37:45"
+  marquante: true
+  mention:
+    fr: Record personnel sur 10 km
+    en: 10 km personal best
+
+- date: 2023-10-01
+  nom: Ironman de Barcelone
+  lieu: Calella
+  discipline: triathlon
+  format: Ironman
+  temps: "9:58:59"
+  classement: 97
+  participants: 2290
+  marquante: true
+  mention:
+    fr: Premier Ironman sous les 10 heures
+    en: First sub-10 Ironman
+  partiels:
+    natation: "1:09:48"
+    velo: "4:51:08"
+    course: "3:47:54"
+
+- date: 2021-10-03
+  nom: Triathlon du Val-André
+  lieu: Pléneuf-Val-André
+  discipline: triathlon
+  format: S
+  temps: "1:20:22"
+  classement: 43
+  participants: 330
+  partiels:
+    natation: "13:06"
+    velo: "39:21"
+    course: "23:50"
+
+- date: 2021-09-12
+  nom: Triathlon de Dinard Côte d'Émeraude
+  lieu: Dinard
+  discipline: triathlon
+  format: M
+  temps: "2:28:29"
+  classement: 29
+  participants: 700
+  partiels:
+    natation: "34:53"
+    velo: "1:05:36"
+    course: "43:20"
+
+- date: 2021-08-22
+  nom: Ironman de Vichy
+  lieu: Vichy
+  discipline: triathlon
+  format: Ironman
+  temps: "10 h 35"
+  classement: 123
+  mention:
+    fr: Premier Ironman
+    en: First Ironman
+  partiels:
+    natation: "1 h 07"
+    velo: "5 h 39"
+    course: "3 h 39"
+
+- date: 2020-09-12
+  nom: Triathlon de Dinard
+  lieu: Dinard
+  discipline: triathlon
+  format: M
+  temps: "2:20:38"
+  classement: 28
+
+- date: 2019
+  nom: Pyjama Party Trail
+  lieu: Tours
+  discipline: trail
+  format: nocturne
+  temps: "2 h 04"
+  classement: 20
+  participants: 138
+
+- date: 2019-10-13
+  nom: 10 km du Crédit Mutuel de Bretagne
+  lieu: Rennes
+  discipline: course
+  format: 10 km
+  temps: "37:48"
+  classement: 181
+  participants: 5600
+
+- date: 2019-09-22
+  nom: 10 km de Tours
+  lieu: Tours
+  discipline: course
+  format: 10 km
+  temps: "39:03"
+
+- date: 2019-06-16
+  nom: Tours'N Man
+  lieu: Tours
+  discipline: triathlon
+  format: L
+  temps: "4:52:31"
+  classement: 120
+  mention:
+    fr: Premier triathlon format L
+    en: First half-distance triathlon
+  partiels:
+    natation: "31:31"
+    t1: "7:13"
+    velo: "2:30:02"
+    t2: "2:03"
+    course: "1:41:40"
+
+- date: 2019-06-02
+  nom: Triathlon du Brin d'Amour
+  lieu: Combreux
+  discipline: triathlon
+  format: M
+  temps: "2:28:13"
+  classement: 36
+  partiels:
+    natation: "27:32"
+    t1: "1:21"
+    velo: "1:11:32"
+    t2: "0:56"
+    course: "46:54"
+
+- date: 2018-12-08
+  nom: Course des 3 Ponts
+  lieu: Orléans
+  discipline: course
+  format: 10 km
+  temps: "44:55"
+
+- date: 2018-12-01
+  nom: SaintéExpress
+  lieu: Lyon
+  discipline: trail
+  format: 44 km
+  temps: "5:02:58"
+  classement: 365
+  lien: https://itra.run/Races/RaceResults/La.Saint%C3%A9xpress/2018/32851
+  mention:
+    fr: 44 km de nuit
+    en: 44 km at night
+
+- date: 2018-10
+  nom: 20 km de Paris
+  lieu: Paris
+  discipline: course
+  format: 20 km
+  temps: "1:32:17"
+  classement: 2327
+  participants: 26281
+
+- date: 2018-06-24
+  nom: Triathlon de Deauville
+  lieu: Deauville
+  discipline: triathlon
+  format: M
+  temps: "2:33:20"
+  classement: 142
+  mention:
+    fr: Premier triathlon
+    en: First triathlon
+  partiels:
+    natation: "32:31"
+    t1: "2:39"
+    velo: "1:11:58"
+    t2: "1:37"
+    course: "44:37"
+
+- date: 2018-05-26
+  nom: Semi-marathon d'Avranches
+  lieu: Avranches
+  discipline: course
+  format: semi-marathon
+  temps: "1:42:06"
+
+- date: 2018-04-08
+  nom: Marathon de Paris
+  lieu: Paris
+  discipline: course
+  format: marathon
+  temps: "3:55:57"
+  classement: 10257
+  participants: 42894
+  mention:
+    fr: Premier marathon
+    en: First marathon
+
+- date: 2018-03-04
+  nom: Semi-marathon de Paris
+  lieu: Paris
+  discipline: course
+  format: semi-marathon
+  temps: "1:32:14"
+
+- date: 2017-06-11
+  nom: 10 km de L'Équipe
+  lieu: Paris
+  discipline: course
+  format: 10 km
+  temps: "42:55"
+
+- date: 2016-03-06
+  nom: Semi-marathon de Paris
+  lieu: Paris
+  discipline: course
+  format: semi-marathon
+  temps: "1:47:07"
+  mention:
+    fr: Premier semi-marathon
+    en: First half marathon
+
+- date: 2015-10-04
+  nom: 10 km Paris Centre
+  lieu: Paris
+  discipline: course
+  format: 10 km
+  temps: "45:07"

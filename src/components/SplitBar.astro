@@ -1,0 +1,49 @@
+---
+import { dict, type Lang } from '../i18n';
+import type { Course } from '../lib/courses';
+import { toSeconds, yearOf } from '../lib/format';
+
+interface Props {
+  course: Course;
+  lang: Lang;
+  /** Sans le titre ni le temps total, quand la carte autour les donne déjà. */
+  compact?: boolean;
+}
+
+const { course, lang, compact = false } = Astro.props;
+const labels = dict[lang].sport.splitLabels;
+const legs = (['natation', 'velo', 'course'] as const).map((key) => ({
+  key,
+  label: labels[key],
+  time: course.partiels?.[key] ?? '',
+  seconds: toSeconds(course.partiels?.[key] ?? ''),
+}));
+const drawable = legs.every((leg) => leg.seconds !== undefined);
+---
+
+{
+  drawable && (
+    <figure class:list={["splitbar", { "splitbar-compact": compact }]} data-splitbar>
+      {!compact && (
+        <figcaption>
+          <span class="splitbar-race">
+            {course.nom} {yearOf(course.date)}
+          </span>
+          <span class="splitbar-total">{course.temps}</span>
+        </figcaption>
+      )}
+      <div class="splitbar-track" aria-hidden="true">
+        {legs.map((leg) => <span class={`seg seg-${leg.key}`} data-segment style={`flex-grow: ${leg.seconds}`} />)}
+      </div>
+      <ul class="splitbar-legend">
+        {legs.map((leg) => (
+          <li>
+            <span class={`swatch seg-${leg.key}`} />
+            <span class="leg-label">{leg.label}</span>
+            <span class="leg-time">{leg.time}</span>
+          </li>
+        ))}
+      </ul>
+    </figure>
+  )
+}

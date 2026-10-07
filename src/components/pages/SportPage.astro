@@ -1,0 +1,65 @@
+---
+import { dict, type Lang } from '../../i18n';
+import Base from '../../layouts/Base.astro';
+import { featured, groupByYear, loadCourses } from '../../lib/courses';
+import CourseTable from '../CourseTable.astro';
+import FeaturedCourse from '../FeaturedCourse.astro';
+import { loadTraining } from '../../lib/entrainement';
+import { toSeconds } from '../../lib/format';
+import TrainingCalendar from '../TrainingCalendar.astro';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = dict[lang];
+const courses = loadCourses();
+// Les fiertés, rangées par discipline (triathlons, puis course à pied) et du plus court au plus long.
+const proud = (['triathlon', 'course', 'velo', 'trail'] as const)
+  .map((discipline) => ({ discipline, courses: featured(courses)
+      .filter((c) => c.discipline === discipline)
+      // Un temps sans secondes (« 10 h 35 ») ne se compare pas : il se range en dernier.
+      .sort((a, b) => (toSeconds(a.temps) ?? Infinity) - (toSeconds(b.temps) ?? Infinity)),
+  }))
+  .filter((group) => group.courses.length > 0);
+const training = loadTraining();
+---
+
+<Base lang={lang} page="sport" title={t.sport.title} description={t.sport.description}>
+  <h1>{t.sport.h1}</h1>
+
+  <section aria-labelledby="featured">
+    <h2 id="featured">{t.sport.featured}</h2>
+    {
+      proud.map((group) => (
+        <section class="proud" data-proud={group.discipline}>
+          <h3>{t.sport.disciplines[group.discipline]}</h3>
+          <div class="featured-grid">
+            {group.courses.map((course) => (
+              <FeaturedCourse course={course} lang={lang} />
+            ))}
+          </div>
+        </section>
+      ))
+    }
+  </section>
+
+  <section aria-labelledby="volume">
+    <h2 id="volume">{t.sport.volume}</h2>
+    <p class="section-intro">{t.sport.volumeCaption}</p>
+    <TrainingCalendar training={training} lang={lang} />
+  </section>
+
+  <section aria-labelledby="history">
+    <h2 id="history">{t.sport.history}</h2>
+    {
+      groupByYear(courses).map((group) => (
+        <section class="year" data-year={group.year}>
+          <h3>{group.year}</h3>
+          <CourseTable courses={group.courses} lang={lang} caption={`${t.sport.h1} ${group.year}`} />
+        </section>
+      ))
+    }
+  </section>
+</Base>

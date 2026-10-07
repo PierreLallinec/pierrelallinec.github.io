@@ -1,0 +1,128 @@
+# Contenu de la page Parcours et de la frise de l'accueil.
+# Chaque texte existe en français (fr) et en anglais (en). Années seulement, pas de mois.
+# Tout ce qui est écrit ici est public. Voir README.md.
+
+# La frise de l'accueil. `repere` (facultatif) remplace `structure` quand il est trop long.
+experiences:
+  - debut: 2022
+    structure: Figures
+    poste: { fr: Data Analyst, en: Data Analyst }
+
+  - debut: 2020
+    fin: 2022
+    structure: Freelance
+    poste: { fr: Data Analyst & Product Manager, en: Data Analyst & Product Manager }
+
+  - debut: 2018
+    fin: 2020
+    structure: Comet
+    poste: { fr: Data Analyst, en: Data Analyst }
+
+  - debut: 2017
+    fin: 2018
+    structure: Comet
+    poste: { fr: Ops Manager, en: Ops Manager }
+
+  - debut: 2014
+    fin: 2017
+    structure: Finance
+    repere: { fr: Banque et capital-risque, en: Banking and venture capital }
+    poste: { fr: Stages en finance, en: Finance internships }
+
+# Le récit, un élément par paragraphe.
+recit:
+  - fr: >-
+      J'ai commencé par la finance : quatre stages entre 2014 et 2017, en banque d'investissement,
+      en analyse financière, en fusions-acquisitions puis en capital-risque chez Kima Ventures.
+      J'y ai appris à lire une entreprise par ses chiffres d'abord, par ses fondateurs ensuite.
+    en: >-
+      I started in finance: four internships between 2014 and 2017, in investment banking,
+      equity research, M&A and then venture capital at Kima Ventures. That is where I learned
+      to read a company through its numbers first, and through its founders second.
+
+  - fr: >-
+      En 2017, j'ai rejoint Comet, une société du portefeuille de Kima Ventures, côté opérations,
+      jusqu'à encadrer une équipe de six personnes. C'est là que j'ai basculé vers la data :
+      formé par le Head of Data, j'ai appris SQL et contribué aux modèles du premier entrepôt
+      de données de l'entreprise, sur BigQuery, dbt et Looker.
+    en: >-
+      In 2017 I joined Comet, which was part of the Kima Ventures portfolio, on the operations
+      side, and ended up managing a team of six. That is where I moved into data: trained by
+      the Head of Data, I learned SQL and contributed to the models of the company's first
+      data warehouse, on BigQuery, dbt and Looker.
+
+  - fr: >-
+      De 2020 à 2022, j'ai travaillé en freelance, à cheval entre data et produit. Pour Cigusto,
+      j'ai tenu le rôle produit d'un ERP créé de zéro : le lien entre l'enseigne et l'agence de
+      développement, du premier prototype au déploiement, en passant par la formation des équipes
+      dans toute la France. Pour Figures, j'ai travaillé sur le MVP et le business plan. J'ai aussi
+      accompagné d'autres enseignes sur des missions ponctuelles, dans la restauration,
+      l'habillement et la coiffure.
+    en: >-
+      From 2020 to 2022 I worked freelance, between data and product. For Cigusto, I held the
+      product role on an ERP built from scratch: the link between the retailer and the development
+      agency, from the first prototype to rollout, including training teams all over France.
+      For Figures, I worked on the MVP and the business plan. I also helped other brands on short
+      assignments, in food service, clothing and hairdressing.
+
+  - fr: >-
+      Depuis 2022, je suis Data Analyst chez Figures. Seul membre de l'équipe data, j'y ai la main
+      sur la transformation et la restitution des données, des modèles dbt aux analyses livrées
+      aux clients, et j'y ai construit plusieurs outils utilisés au quotidien, en interne comme
+      par les clients.
+    en: >-
+      Since 2022 I have been a Data Analyst at Figures. As the only member of the data team,
+      I own data transformation and reporting, from dbt models to the analyses delivered to
+      customers, and I built several tools there that are used every day, internally and by
+      customers.
+
+# Un bloc par structure. `periode` date un travail terminé.
+realisations:
+  - titre: { fr: Construit chez Figures, en: Built at Figures }
+    elements:
+      - titre: { fr: Figures Estimates, en: Figures Estimates }
+        texte:
+          fr: Un moteur de prédiction des rémunérations, fondé sur du gradient boosting.
+          en: A compensation prediction engine, built on gradient boosting.
+      - titre: { fr: Assistant data interne, en: Internal data assistant }
+        texte:
+          fr: Un chatbot adossé à une couche sémantique, qui traite la quasi-totalité des demandes data de l'équipe.
+          en: A chatbot built on a semantic layer, which handles nearly all of the team's data requests.
+      - titre: { fr: Chatbot pour les clients, en: Customer chatbot }
+        texte:
+          fr: Le même principe, ouvert aux utilisateurs de Figures.
+          en: The same approach, opened up to Figures users.
+
+  - titre: { fr: Piloté chez Cigusto, en: Led at Cigusto }
+    elements:
+      - titre: { fr: ERP, en: ERP }
+        texte:
+          fr: "Le rôle produit d'un ERP créé de zéro pour la centrale d'achat et les magasins : achats, stocks, caisse, facturation, promotions. Déployé dans 120 magasins en deux semaines."
+          en: "The product role on an ERP built from scratch for the purchasing hub and the stores: purchasing, inventory, point of sale, invoicing, promotions. Rolled out to 120 stores in two weeks."
+      - titre: { fr: WMS, en: WMS }
+        texte:
+          fr: "Le lien entre les métiers, l'ERP et la logistique lors du changement de plateforme logistique : flux de commandes et de stock avec l'ERP, nettoyage de la base produits et des EAN avant le lancement, anticipation des commandes pour couvrir plusieurs jours d'arrêt d'activité sur le réseau."
+          en: "The link between the business, the ERP and logistics during the move to a new logistics platform: order and stock flows with the ERP, cleaning the product and EAN database before launch, and planning orders ahead to cover several days of network downtime."
+      - titre: { fr: BI, en: BI }
+        texte:
+          fr: "Metabase mis en place pendant le projet : suivi des anomalies de caisse et de retours, et cartes de fréquentation des magasins comparées aux plannings."
+          en: "Metabase set up during the project: monitoring of cash and returns anomalies, and store footfall heatmaps compared with staff schedules."
+
+# `experiences` : où l'outil a servi, affiché au survol. « perso » = projets personnels.
+outils:
+  - { nom: SQL, experiences: [Comet, Cigusto, Figures, perso] }
+  - { nom: dbt, experiences: [Comet, Cigusto, Figures, perso] }
+  - { nom: BigQuery, experiences: [Comet] }
+  - { nom: PostgreSQL, experiences: [Cigusto, Figures, perso] }
+  - { nom: MariaDB, experiences: [Cigusto] }
+  - { nom: Looker, experiences: [Comet] }
+  - { nom: Metabase, experiences: [Cigusto, Figures, perso] }
+  - { nom: LLM, experiences: [perso, Figures] }
+  - { nom: Git, experiences: [perso, Figures] }
+
+formation:
+  ecoles: [ESSCA, Fordham University]
+
+langues:
+  - { fr: Français, en: French }
+  - { fr: Anglais, en: English }

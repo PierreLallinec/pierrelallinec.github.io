@@ -1,0 +1,68 @@
+---
+import { dict, formatLabel, type Lang } from '../i18n';
+import type { Course } from '../lib/courses';
+import { formatDate, formatRank } from '../lib/format';
+import Splits from './Splits.astro';
+
+interface Props {
+  courses: Course[];
+  lang: Lang;
+  caption: string;
+}
+
+const { courses, lang, caption } = Astro.props;
+const t = dict[lang].sport;
+---
+
+<div class="table-wrap">
+  <table class="courses">
+    <caption class="sr-only">{caption}</caption>
+    <thead>
+      <tr>
+        <th scope="col">{t.cols.date}</th>
+        <th scope="col">{t.cols.race}</th>
+        <th scope="col">{t.cols.format}</th>
+        <th scope="col" class="num">{t.cols.time}</th>
+        <th scope="col" class="num">{t.cols.rank}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {
+        courses.map((course) => (
+          <tr>
+            <td class="race-date">
+              <time datetime={course.date}>{formatDate(course.date, lang)}</time>
+            </td>
+            <th scope="row">
+              <span class="race-name">{course.nom}</span>
+              {course.lieu && <span class="race-place">{course.lieu}</span>}
+              {course.mention?.[lang] && <span class="race-note">{course.mention[lang]}</span>}
+              {course.partiels && (
+                <details>
+                  <summary>{t.splits}</summary>
+                  <Splits partiels={course.partiels} lang={lang} />
+                </details>
+              )}
+            </th>
+            <td>
+              <span class={`disc disc-${course.discipline}`}>{t.disciplines[course.discipline]}</span>
+              <span class="race-format">{formatLabel(course.format, lang)}</span>
+            </td>
+            <td class="num race-time">
+              {course.lien ? (
+                <a data-official href={course.lien} rel="noopener" title={t.official}>
+                  {course.temps}
+                </a>
+              ) : (
+                course.temps
+              )}
+            </td>
+            <td class="num" data-rank>
+              {formatRank(course.classement, course.participants, lang)}
+            </td>
+          </tr>
+        ))
+      }
+    </tbody>
+  </table>
+</div>
