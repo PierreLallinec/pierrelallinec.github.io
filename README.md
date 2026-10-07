@@ -93,13 +93,15 @@ Une course peut aussi s'ajouter depuis github.com : ouvrir `src/data/courses.yam
 
 Un contrôle supplémentaire compare le site à une liste de termes interdits, `tests/liste-noire.local.txt`, un terme par ligne. Ce fichier reste sur la machine de Pierre et n'est jamais publié, pour ne pas révéler ce qu'il sert à cacher. Sans lui, ce contrôle est sauté.
 
-## Passer au domaine pierrelallinec.fr
+## Le domaine pierrelallinec.fr
 
-1. Sur GitHub, dans Settings → Pages → Custom domain, saisir `pierrelallinec.fr` et enregistrer. Le site étant déployé par GitHub Actions, c'est ce réglage qui compte : un fichier `CNAME` dans le dépôt serait ignoré.
-2. Chez le registrar, créer un enregistrement `ALIAS` ou quatre enregistrements `A` vers GitHub Pages, et un `CNAME` `www` vers `pierrelallinec.github.io` (voir la documentation de GitHub Pages sur les domaines personnalisés).
-3. Dans `src/config.ts`, remplacer `url` par `https://pierrelallinec.fr`. C'est le seul endroit du code à modifier : les URL canoniques, le plan du site et les tests en découlent.
-4. `npm run check`, puis publier.
-5. Une fois le certificat émis, cocher « Enforce HTTPS » dans Settings → Pages.
+Le site est servi sur `https://pierrelallinec.fr`. Trois réglages le permettent :
+
+- Chez Infomaniak, la zone DNS porte quatre enregistrements `A` vers GitHub Pages pour la racine, et un `CNAME` `www` vers `pierrelallinec.github.io`.
+- Sur GitHub, Settings → Pages → Custom domain vaut `pierrelallinec.fr`. Le site étant déployé par GitHub Actions, c'est ce réglage qui compte : un fichier `CNAME` dans le dépôt serait ignoré.
+- Dans `src/config.ts`, `url` vaut `https://pierrelallinec.fr`. C'est le seul endroit du code qui connaît l'adresse : les URL canoniques, le plan du site et les tests en découlent.
+
+Le domaine se renouvelle chaque année chez Infomaniak. S'il expire, le site reste joignable sur `pierrelallinec.github.io` une fois le domaine retiré des réglages Pages.
 
 ## Première publication
 
