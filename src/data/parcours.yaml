@@ -23,7 +23,7 @@ experiences:
     structure: Comet
     poste: { fr: Ops Manager, en: Ops Manager }
 
-  - debut: 2014
+  - debut: 2015
     fin: 2017
     structure: Finance
     repere: { fr: Banque et capital-risque, en: Banking and venture capital }
@@ -32,11 +32,11 @@ experiences:
 # Le récit, un élément par paragraphe.
 recit:
   - fr: >-
-      J'ai commencé par la finance : quatre stages entre 2014 et 2017, en banque d'investissement,
+      J'ai commencé par la finance : quatre stages entre 2015 et 2017, en banque d'investissement,
       en analyse financière, en fusions-acquisitions puis en capital-risque chez Kima Ventures.
       J'y ai appris à lire une entreprise par ses chiffres d'abord, par ses fondateurs ensuite.
     en: >-
-      I started in finance: four internships between 2014 and 2017, in investment banking,
+      I started in finance: four internships between 2015 and 2017, in investment banking,
       equity research, M&A and then venture capital at Kima Ventures. That is where I learned
       to read a company through its numbers first, and through its founders second.
 
