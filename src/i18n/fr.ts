@@ -35,7 +35,7 @@ export const fr = {
     description:
       'Résultats sportifs de Pierre Lallinec : Ironman, triathlons, semi-marathons, marathons et courses cyclistes, avec temps, classements et liens officiels.',
     h1: 'Résultats sportifs',
-    featured: 'Ce dont je suis fier',
+    featured: 'Les jours avec',
     volume: 'Entraînement',
     volumeCaption: "J'aime la data, et vous ?",
     calendarSummary: '{days} jours actifs',

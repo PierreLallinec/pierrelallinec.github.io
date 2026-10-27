@@ -25,7 +25,7 @@ Ces cinq champs sont obligatoires. Les autres sont facultatifs :
 | `participants` | `444` | À omettre s'il n'est pas connu. |
 | `lien` | `https://...` | Page du résultat officiel. Le temps devient cliquable. Jamais une adresse qui contient le numéro de dossard (`bib-123`). |
 | `mention` | `{ fr: Record personnel, en: Personal best }` | Si une langue manque, la mention n'apparaît pas dans cette langue. |
-| `marquante` | `true` | Affiche la course dans « Ce dont je suis fier ». |
+| `marquante` | `true` | Affiche la course dans « Les jours avec ». |
 | `partiels` | voir ci-dessous | Triathlons. `natation`, `velo`, `course` ; `t1` et `t2` facultatifs. |
 
 ```yaml
@@ -46,7 +46,7 @@ Règles de saisie :
 
 ### Changer les courses mises en avant
 
-« Ce dont je suis fier » affiche les courses marquées `marquante: true`, regroupées par discipline et rangées de la plus courte à la plus longue. Pour remplacer une course, retirer la ligne de l'ancienne et l'ajouter à la nouvelle.
+« Les jours avec » affiche les courses marquées `marquante: true`, regroupées par discipline et rangées de la plus courte à la plus longue. Pour remplacer une course, retirer la ligne de l'ancienne et l'ajouter à la nouvelle.
 
 ## Mettre à jour le calendrier d'entraînement
 

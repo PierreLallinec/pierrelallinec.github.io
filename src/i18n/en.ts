@@ -37,7 +37,7 @@ export const en: Dict = {
     description:
       'Race results of Pierre Lallinec: Ironman, triathlons, half marathons, marathons and cycling events, with times, rankings and official links.',
     h1: 'Race results',
-    featured: 'Most proud of',
+    featured: 'The good days',
     volume: 'Training',
     volumeCaption: 'I love data. How about you?',
     calendarSummary: '{days} active days',

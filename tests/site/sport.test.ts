@@ -107,8 +107,8 @@ describe('graphiques de la page Sport', () => {
         .map((c) => c.nom);
       expect(group.querySelectorAll('[data-featured] h4').map((h) => h.text.trim())).toEqual(expected);
     }
-    expect(fr.querySelector('#featured')?.text).toBe('Ce dont je suis fier');
-    expect(en.querySelector('#featured')?.text).toBe('Most proud of');
+    expect(fr.querySelector('#featured')?.text).toBe('Les jours avec');
+    expect(en.querySelector('#featured')?.text).toBe('The good days');
   });
 
   it('n’affiche plus la progression ni les heures par an', () => {
