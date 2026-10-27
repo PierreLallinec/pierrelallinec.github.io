@@ -1467,3 +1467,220 @@ h3 {
     opacity: 1;
   }
 }
+
+/* ==========================================================================
+   Téléphone : tout tient en largeur, rien ne déborde.
+   ========================================================================== */
+.name-initials {
+  display: none;
+}
+
+@media (max-width: 40rem) {
+  /* Menu sur une ligne : initiales, trois liens, le bouton, la langue. */
+  .site-header {
+    flex-wrap: nowrap;
+    gap: 0.75rem;
+    padding-block: 1rem;
+    font-size: 0.95rem;
+  }
+
+  .site-header nav ul {
+    gap: 0.75rem;
+  }
+
+  .name-full {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .name-initials {
+    display: inline;
+    letter-spacing: 0.08em;
+  }
+
+  .site-header .button {
+    padding: 0.3rem 0.8rem;
+    white-space: nowrap;
+  }
+
+  .lang-switch {
+    padding: 0.05rem 0.45rem;
+  }
+
+  /* Accueil : le portrait à côté du nom, une accroche à taille de lecture. */
+  .hero {
+    grid-template-columns: auto 1fr;
+    gap: 1.25rem 1rem;
+  }
+
+  .hero-text {
+    display: contents;
+  }
+
+  .portrait-frame {
+    order: 0;
+    grid-column: 1;
+    grid-row: 1;
+    width: 5.5rem;
+  }
+
+  .hero h1 {
+    grid-column: 2;
+    grid-row: 1;
+    font-size: clamp(1.5rem, 7vw, 2rem);
+    letter-spacing: 0.12em;
+  }
+
+  .intro {
+    grid-column: 1 / -1;
+    margin-top: 0;
+    font-size: var(--step-0);
+    line-height: 1.5;
+  }
+
+  .timeline {
+    margin-top: 2.5rem;
+  }
+
+  /* Fiertés : des cartes compactes, deux par ligne. */
+  .featured-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem 1rem;
+  }
+
+  .proud + .proud {
+    margin-top: 2rem;
+  }
+
+  .proud > h3 {
+    margin-bottom: 0.75rem;
+  }
+
+  .featured {
+    padding-top: 0.6rem;
+  }
+
+  .featured-meta,
+  .featured-facts {
+    flex-direction: column;
+    gap: 0;
+    font-size: 0.75rem;
+    line-height: 1.35;
+  }
+
+  .featured h4 {
+    font-size: var(--step-0);
+  }
+
+  .featured-time {
+    margin-top: 0.3rem;
+    font-size: 1.75rem;
+  }
+
+  .featured-facts {
+    margin-top: 0.3rem;
+  }
+
+  .splitbar-compact {
+    margin-top: 0.6rem;
+  }
+
+  .splitbar-compact .splitbar-track {
+    height: 0.5rem;
+    gap: 2px;
+  }
+
+  .splitbar-compact .splitbar-legend {
+    gap: 0 0.6rem;
+    margin-top: 0.4rem;
+    font-size: 0.75rem;
+  }
+
+  .splitbar-compact .leg-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+
+  .splitbar-compact .swatch {
+    width: 0.5rem;
+    height: 0.5rem;
+  }
+}
+
+/* Calendrier : le bandeau des années ne sert que sur téléphone. */
+.calendar-tabs {
+  display: none;
+}
+
+@media (max-width: 36rem) {
+  .calendar {
+    --visible: 1;
+  }
+
+  .calendar-nav {
+    display: none;
+  }
+
+  .calendar-tabs {
+    display: flex;
+    gap: 0.4rem;
+    margin-bottom: 1rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+    /* Les bords s'estompent : on devine qu'il reste des années de chaque côté. */
+    mask-image: linear-gradient(90deg, transparent, #000 1.25rem, #000 calc(100% - 1.25rem), transparent);
+    padding-inline: 1.25rem;
+  }
+
+  .calendar-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .calendar-tabs button {
+    flex: none;
+    padding: 0.3rem 0.8rem;
+    border: 1.5px solid var(--line);
+    border-radius: 999px;
+    background: none;
+    color: var(--muted);
+    font: inherit;
+    font-size: var(--step--1);
+    font-weight: 600;
+    font-variant-numeric: lining-nums tabular-nums;
+    cursor: pointer;
+  }
+
+  .calendar-tabs button[aria-pressed='true'] {
+    border-color: transparent;
+    background: linear-gradient(90deg, var(--warm-a), var(--warm-b));
+    color: #fff;
+  }
+
+  .calendar-years {
+    scrollbar-width: none;
+    overscroll-behavior-x: contain;
+  }
+
+  .calendar-years::-webkit-scrollbar {
+    display: none;
+  }
+
+  .calendar-year h3 {
+    display: none;
+  }
+
+  .calendar-months {
+    gap: 1rem 1.25rem;
+  }
+
+  .calendar-label {
+    text-align: center;
+  }
+}

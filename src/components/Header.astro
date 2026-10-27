@@ -10,11 +10,16 @@ interface Props {
 const { lang, page } = Astro.props;
 const t = dict[lang];
 const other = otherLang(lang);
+// Sur téléphone, les initiales laissent tenir le menu sur une seule ligne.
+const initials = site.name.split(' ').map((w) => w[0]).join('');
 const keys: PageKey[] = ['home', 'career', 'sport'];
 ---
 
 <header class="site-header">
-  <a class="site-name" href={routes.home[lang]}>{site.name}</a>
+  <a class="site-name" href={routes.home[lang]}>
+    <span class="name-full">{site.name}</span>
+    <span class="name-initials" aria-hidden="true">{initials}</span>
+  </a>
   <nav aria-label={t.navLabel}>
     <ul>
       {

@@ -45,6 +45,7 @@ export const en: Dict = {
     months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
     other: 'Other',
     calendarLabel: 'Training calendar by year, scrollable',
+    yearsLabel: 'Pick a year',
     previous: 'Earlier years',
     next: 'Later years',
     strength: 'Strength',

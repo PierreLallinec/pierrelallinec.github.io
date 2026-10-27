@@ -25,6 +25,16 @@ const months = Array.from({ length: 12 }, (_, i) => i + 1);
 ---
 
 <div class="calendar" data-calendar>
+  <!-- Sur téléphone : une année à la fois, choisie dans ce bandeau ou d'un glissement du doigt. -->
+  <div class="calendar-tabs" role="group" aria-label={t.yearsLabel}>
+    {
+      years.map((year) => (
+        <button type="button" data-year-tab={year} aria-pressed={year === lastYear ? 'true' : 'false'}>
+          {year}
+        </button>
+      ))
+    }
+  </div>
   <div class="calendar-nav">
     <button type="button" data-scroll="-1" aria-label={t.previous}>‹</button>
     <button type="button" data-scroll="1" aria-label={t.next}>›</button>
@@ -106,15 +116,38 @@ const months = Array.from({ length: 12 }, (_, i) => i + 1);
 </div>
 
 <script>
-  // La bande s'ouvre sur les années les plus récentes ; les flèches la font glisser d'une année.
+  // La bande s'ouvre sur l'année la plus récente ; les flèches et le bandeau des années la font glisser.
   for (const calendar of document.querySelectorAll<HTMLElement>('[data-calendar]')) {
     const strip = calendar.querySelector<HTMLElement>('.calendar-years')!;
+    const blocks = [...strip.querySelectorAll<HTMLElement>('[data-calendar-year]')];
+    const tabs = [...calendar.querySelectorAll<HTMLButtonElement>('button[data-year-tab]')];
+    const tabBar = calendar.querySelector<HTMLElement>('.calendar-tabs')!;
     strip.scrollLeft = strip.scrollWidth;
     for (const button of calendar.querySelectorAll<HTMLButtonElement>('button[data-scroll]')) {
       button.addEventListener('click', () => {
-        const step = strip.querySelector<HTMLElement>('.calendar-year')!.getBoundingClientRect().width;
+        const step = blocks[0].getBoundingClientRect().width;
         strip.scrollBy({ left: Number(button.dataset.scroll) * step, behavior: 'smooth' });
       });
     }
+    for (const tab of tabs) {
+      tab.addEventListener('click', () => {
+        const block = blocks.find((b) => b.dataset.calendarYear === tab.dataset.yearTab)!;
+        strip.scrollTo({ left: block.offsetLeft - blocks[0].offsetLeft, behavior: 'smooth' });
+      });
+    }
+    // L'onglet allumé suit l'année affichée, et reste visible dans le bandeau.
+    const sync = () => {
+      const left = strip.getBoundingClientRect().left;
+      const current = blocks.reduce((best, b) =>
+        Math.abs(b.getBoundingClientRect().left - left) < Math.abs(best.getBoundingClientRect().left - left) ? b : best,
+      );
+      for (const tab of tabs) {
+        const on = tab.dataset.yearTab === current.dataset.calendarYear;
+        tab.setAttribute('aria-pressed', on ? 'true' : 'false');
+        if (on) tabBar.scrollTo({ left: tab.offsetLeft - tabBar.offsetLeft - (tabBar.clientWidth - tab.offsetWidth) / 2 });
+      }
+    };
+    strip.addEventListener('scroll', sync, { passive: true });
+    sync();
   }
 </script>

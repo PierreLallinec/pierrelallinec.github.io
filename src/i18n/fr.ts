@@ -43,6 +43,7 @@ export const fr = {
     months: ['janv.', 'févr.', 'mars', 'avr.', 'mai', 'juin', 'juil.', 'août', 'sept.', 'oct.', 'nov.', 'déc.'],
     other: 'Autre',
     calendarLabel: "Calendrier d'entraînement par année, à faire défiler",
+    yearsLabel: 'Choisir une année',
     previous: 'Années précédentes',
     next: 'Années suivantes',
     strength: 'Musculation',
