@@ -2,6 +2,17 @@
 # date : AAAA-MM-JJ, AAAA-MM ou AAAA. discipline : triathlon, course, velo ou trail.
 # Mettre les temps entre guillemets. Voir README.md.
 
+- date: 2026-11-08
+  nom: Marathon de la Côte d'Amour
+  lieu: La Baule
+  discipline: course
+  format: marathon
+  temps: "3:11:25"
+  marquante: true
+  mention:
+    fr: Record personnel sur marathon
+    en: Marathon personal best
+
 - date: 2025-08-23
   nom: 24 Heures Vélo du Mans
   lieu: Le Mans
