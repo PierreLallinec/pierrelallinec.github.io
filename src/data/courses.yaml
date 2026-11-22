@@ -2,6 +2,18 @@
 # date : AAAA-MM-JJ, AAAA-MM ou AAAA. discipline : triathlon, course, velo ou trail.
 # Mettre les temps entre guillemets. Voir README.md.
 
+- date: 2026-11-21
+  nom: Course des 3 Ponts
+  lieu: Orléans
+  discipline: course
+  format: 10 km
+  temps: "36:45"
+  classement: 67
+  marquante: true
+  mention:
+    fr: Mon 10 km local (J+13 marathon)
+    en: My local 10K (13 days after a marathon)
+
 - date: 2026-11-08
   nom: Marathon de la Côte d'Amour
   lieu: La Baule
@@ -140,10 +152,6 @@
   discipline: course
   format: 10 km
   temps: "37:45"
-  marquante: true
-  mention:
-    fr: Record personnel sur 10 km
-    en: 10 km personal best
 
 - date: 2023-10-01
   nom: Ironman de Barcelone
