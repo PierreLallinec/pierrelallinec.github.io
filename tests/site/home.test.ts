@@ -83,6 +83,12 @@ describe.each([
     expect(frise!.querySelector('.tl-gap')).toBeNull();
   });
 
+  it('signale que le poste chez Figures est en cours', () => {
+    const now = frise!.querySelector('[data-now]');
+    expect(now).not.toBeNull();
+    expect(now!.text.trim()).toBe(path === '/' ? 'present' : "aujourd'hui");
+  });
+
   it('marque chaque changement par son année', () => {
     const years = frise!.querySelectorAll('.tl-year').map((n) => Number(n.text));
     expect(years.length).toBeGreaterThanOrEqual(3);

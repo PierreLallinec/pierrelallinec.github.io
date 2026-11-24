@@ -459,6 +459,20 @@ main {
   font-variant-numeric: tabular-nums;
 }
 
+/* Poste en cours : point creux et mention « aujourd'hui ». */
+.tl-now-label {
+  align-self: start;
+  padding: 0.75rem 0.5rem 0;
+  text-align: center;
+  font-weight: 700;
+}
+
+.tl-now .tl-mark {
+  box-sizing: border-box;
+  background: var(--paper);
+  border: 2px solid var(--ink);
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .tl-line {
     animation: grow 0.45s ease-out backwards;
@@ -492,8 +506,11 @@ main {
 
 /* Sur petit écran, la frise se lit de haut en bas. */
 @media (max-width: 48rem) {
+  /* Du plus récent au plus ancien : le poste actuel en premier. */
   .timeline {
-    display: block;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: stretch;
     border-left: 2px solid var(--ink);
     margin-left: 0.5rem;
   }
@@ -516,7 +533,8 @@ main {
 
   .tl-role,
   .tl-org,
-  .tl-year {
+  .tl-year,
+  .tl-now-label {
     display: block;
     padding: 0;
     text-align: left;
